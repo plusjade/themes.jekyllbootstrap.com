@@ -82,7 +82,7 @@
     $themeExplorer.show();
 
     themes.forEach(function(theme){
-      cache += '<li><a href="/'+ theme +'">'+ theme +'</a></li>';
+      cache += '<li><a href="/themes/'+ theme +'">'+ theme +'</a></li>';
     })
     
     $themeExplorer.find("ul").html(cache);
