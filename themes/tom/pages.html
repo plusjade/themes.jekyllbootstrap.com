@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>Pages</title>
+   <meta name="author" content="Name Lastname" />
+   <link href="http://feeds.feedburner.com/username" rel="alternate" title="your title" type="application/atom+xml" />
+
+   <!-- syntax highlighting CSS -->
+   <link rel="stylesheet" href="/assets/themes/tom/css/syntax.css" type="text/css" />
+
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="/assets/themes/tom/css/screen.css" type="text/css" media="screen, projection" />
+
+   <!-- Typekit -->
+   <script type="text/javascript" src="http://use.typekit.com/jpd0pfm.js"></script>
+   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+
+  <div class="site">
+    <div class="title">
+      <a href="/themes/tom">Jekyll Bootstrap</a>
+      <a class="extra" href="/themes/tom/archive.html">Archive</a>
+      <a class="extra" href="/themes/tom/pages.html">Pages</a>
+      <a class="extra" href="/themes/tom/categories.html">Categories</a>
+      <a class="extra" href="/themes/tom/tags.html">Tags</a>
+    </div>
+  
+    
+<div id="post">
+
+
+<h2>All Pages</h2>
+<ul>
+
+
+
+
+  
+    
+    	
+    	<li><a href="/themes/tom/archive.html">Archive</a></li>
+    	
+    
+  
+    
+    	
+    	<li><a href="/themes/tom/atom.xml">Atom Feed</a></li>
+    	
+    
+  
+    
+    	
+    	<li><a href="/themes/tom/categories.html">Categories</a></li>
+    	
+    
+  
+    
+    	
+    	<li><a href="/themes/tom/index.html">Hello World!</a></li>
+    	
+    
+  
+    
+    	
+    	<li class="active"><a href="/themes/tom/pages.html" class="active">Pages</a></li>
+    	
+    
+  
+    
+    	
+    	<li><a href="/themes/tom/sitemap.txt">Sitemap</a></li>
+    	
+    
+  
+    
+    	
+    	<li><a href="/themes/tom/tags.html">Tags</a></li>
+    	
+    
+  
+
+
+
+</ul>
+
+</div>
+
+
+  
+    <div class="footer">
+      <div class="contact">
+        <p>
+          Name Lastname<br />
+          tagline<br />
+          blah@email.test
+        </p>
+      </div>
+      <div class="contact">
+        <p>
+          <a href="http://github.com/username/">github.com/username</a><br />
+          <a href="http://twitter.com/username/">twitter.com/username</a><br />
+          <a href="http://flickr.com/photos/username/">flickr.com/photos/username</a>
+        </p>
+      </div>
+      <div class="rss">
+        <a href="http://feeds.feedburner.com/username">
+          <img src="/images/rss.png" alt="Subscribe to RSS Feed" />
+        </a>
+      </div>
+    </div>
+  </div>
+  <a href="http://github.com/username"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
+
+  
+
+
+  <style type="text/css">
+  #theme_explorer {
+    position:fixed !important;
+    top:0; left:0;
+    width:200px !important;
+    height:100% !important;
+    background:#555 !important;
+    border-right:1px solid #222 !important;
+    z-index:999998 !important;
+    box-shadow:1px -2px 18px #555;
+  }
+  
+  #theme_explorer h2 {
+    font-size: 14px; font-weight:bold; color:#FFF;
+    padding-left:10px;
+    line-height:34px;
+    background:#111;
+  }
+  #theme_explorer h4 { 
+    font-size: 14px; font-weight:bold; 
+    color:#FFF;
+    text-align:left;
+    padding-left:10px;
+    line-height:34px;
+    background:transparent;
+  }
+  
+  #theme_explorer div.current_theme {
+    background:#ccc;
+    height:100px;
+  }
+  #theme_explorer div { 
+    padding:10px !important;
+  }
+  #theme_explorer ul {
+    text-align: left !important;;
+    margin:0; padding:0 !important;
+  }  
+  #theme_explorer a {
+    color:#FFF !important;
+    font-weight: normal !important;
+    font-family:verdana !important;
+    font-size: 12px !important;
+  }  
+  #theme_explorer_hide { 
+    display:block;
+    text-align:center;
+    background:red;
+    position:fixed;
+    bottom:0;left:0;
+    width:200px; 
+    font-size:20px;
+    line-height:34px;
+    color:#FFF;
+    z-index:999999 !important;
+  }
+</style>
+  <div id="theme_explorer">
+    <h2>Theme Explorer</h2>
+    <h4>Current Theme</h4>
+    <div class="current_theme">
+      
+      
+    </div>
+    <h4>Next Theme</h4>
+
+    <div class="inner">
+      <ul>
+  
+      </ul>
+    </div>
+  </div>
+  <a href="#" id="theme_explorer_hide">hide</a>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" charset="utf-8"></script>
+<script>
+  $(function(){
+    var $themeExplorer = $("#theme_explorer");
+    var themes = ["twitter", "the-minimum", "tom", "mark-reid"];
+    var cache = "";
+    
+    $themeExplorer.show();
+
+    themes.forEach(function(theme){
+      cache += '<li><a href="/themes/'+ theme +'">'+ theme +'</a></li>';
+    })
+    
+    $themeExplorer.find("ul").html(cache);
+    $("#theme_explorer_hide").click(function(e){
+      $themeExplorer.animate({left: parseInt($themeExplorer.css('left'),10) == 0 ? -$themeExplorer.outerWidth() : 0});
+      e.preventDefault();
+      return false;
+    })
+  })
+</script>
+
+
+
+</body>
+</html>
+
