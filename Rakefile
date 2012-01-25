@@ -1,5 +1,6 @@
 require "rubygems"
 require 'rake'
+import './_generate_themes.rake'
 
 SOURCE = "."
 CONFIG = {
@@ -8,6 +9,7 @@ CONFIG = {
   'posts' => File.join(SOURCE, "_posts"),
   'post_ext' => "md"
 }
+
 
 # Usage: rake post title="A Title"
 desc "Begin a new post in #{CONFIG['posts']}"
