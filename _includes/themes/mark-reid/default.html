@@ -34,10 +34,9 @@
     </h1>
     <ul class="nav">
       <li><a class="home" href="{{ HOME_PATH }}">Home</a></li>
-      <li><a  href="/archive.html">Archive</a></li>
-      <li><a  href="/pages.html">Pages</a></li>
-      <li><a  href="/categories.html">Categories</a></li>
-      <li><a  href="/tags.html">Tags</a></li>
+      {% assign pages_list = site.pages %}
+			{% assign group = 'navigation' %}
+			{% include JB/pages_list %}
     </ul>
   </div>
 
