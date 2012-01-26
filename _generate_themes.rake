@@ -4,7 +4,8 @@ task :generate_themes do
   require 'json'
   require 'yaml'
   theme_data = []
-  
+  namespace = "preview" # folder all themes are namespaced into.
+
   Dir.glob("#{CONFIG['themes']}/*") do |theme|
     next unless FileTest.directory?(theme)
     
@@ -18,13 +19,13 @@ task :generate_themes do
     # Also omit theme folder to avoid recursion ; assets because asset urls are absolute.
     options = Jekyll.configuration({
       "safe" => true,
-      "destination" => File.join(SOURCE, "themes", File.basename(theme)),
+      "destination" => File.join(SOURCE, namespace, File.basename(theme)),
       "JB" => {
-        "BASE_PATH" => "/themes/#{File.basename(theme)}",
+        "BASE_PATH" => "/#{namespace}/#{File.basename(theme)}",
         "ASSET_PATH" => "/assets/themes/#{File.basename(theme)}"
       },
     })
-    options["exclude"] += ["themes", "assets"]
+    options["exclude"] += [namespace, "assets"]
     
     system "rake switch_theme name='#{File.basename(theme)}'"
 
@@ -41,7 +42,7 @@ task :generate_themes do
     puts "Successfully generated site: #{options['source']} -> #{options['destination']}"
   end
   
-  open(File.join(SOURCE, "themes", "data.json"), "w") do |page|
+  open(File.join(SOURCE, namespace, "data.json"), "w") do |page|
     page.puts theme_data.to_json
   end
   

@@ -1,6 +1,8 @@
 $(function(){
   
   var TE = {
+    // name of subdirectory themes are in.
+    namespace : 'preview', 
     $container : $("#theme_explorer"),
     $current : $("#te_current"),
     $themesWrap : $("#te_themes"),
@@ -23,8 +25,8 @@ $(function(){
         function(){ $(this).addClass("stretch") }, 
         function(){ $(this).removeClass("stretch") }
       )
-    
-      $.getJSON("/themes/data.json", function(data){
+
+      $.getJSON("/"+TE.namespace+"/data.json", function(data){
         TE.themes = data;
         TE.loadThemes();
         TE.setActiveTheme();
@@ -37,8 +39,7 @@ $(function(){
         $.mustache(TE.themesTmpl, {
           themes : TE.themes, 
           buildUrl : function(){ 
-            return function(name, render) 
-              return render( TE.buildUrl(name) )
+            return function(name, render) {return render( TE.buildUrl(name) ) }
           }
         })
       );
@@ -68,8 +69,8 @@ $(function(){
     // builds the Url for the given themeName
     buildUrl : function(themeName){
       var arr = location.pathname.split("/");
-      if   (arr[1] === "themes")  arr[2] = themeName;
-      else { arr.shift(); arr.unshift("", "themes", themeName) }
+      if   (arr[1] === TE.namespace)  arr[2] = themeName;
+      else { arr.shift(); arr.unshift("", TE.namespace, themeName) }
       return arr.join("/");
     },
     
