@@ -10,20 +10,22 @@
 	color:#eee;
 }
 #theme_explorer a {
-  color:#FFF;
 	text-decoration:none;
 }
-
+#theme_explorer ul, #theme_explorer ul li { 
+	list-style:none !important;
+}
 #theme_explorer .te_header {
   display:block;
 	font-size: 14px;
   font-weight: bold;
 }	
+
 #theme_explorer {
   position:fixed;
 	left: 0px;
 	bottom: 0px;
-	height: 150px;
+	height: 120px;
 	width: 100%;
 	background:#111;
 	box-shadow:1px -2px 12px #777;
@@ -48,70 +50,96 @@
 	display:block;
 	padding: 0 20px;
 }
-
-
 #theme_explorer ul.te_tab li a.te_hide { 
   background:red;
 }
 
-#theme_explorer div.current_theme {
-	position:absolute;
-	top:-20px; left:5px;
-	width:200px;
-	height:170px;
-  background:#046D8B;
-  background:#FCFEF5;
-	text-align:center;
-	border-radius:3px 3px 3px 0;
-	box-shadow:-1px 2px 10px #777;
-}
-#theme_explorer div.current_theme a { 
+/* INSTALL BUTTON 
+ ------------------ */
+#te_install { 
 	display:block;
 	position:relative;
-	left:-5px;
-	width:210px;
+	top:-34px;
+	left:0;
+	width:200px;
 	line-height:34px;
 	font-size:14px;
+	text-align:center;
+	z-index:5;
+	border-radius: 3px 3px 0 0;
 }
-#theme_explorer strong { 
-  text-align:center;
-  line-height:34px;
-}
-#theme_explorer div.current_theme span { 
-	display:block;
-	line-height:34px;
-	padding:0 8px;
-	border-radius:3px;
-	font-size: 14px;
-  font-weight:bold;
-	color:#333;
-}
-#theme_explorer ul.te_themes {
+
+/* current theme container
+ ------------------ */
+#te_current {
 	position:absolute;
-	top:25px; left:210px;
+	top:0px; left:0;
+	min-width:200px;
+	width:200px;
+	height:130px;
+	padding:4px 0 0 0 !important;
+	overflow:hidden;
+  background:#FCFEF5 !important;
+	box-shadow:-1px 2px 10px #777;
+}
+#te_current.stretch {
+	min-width:200px !important;
+	width:auto !important;
+	padding-right:10px !important;
+}
+#te_current, #te_current span, #te_current strong, #te_current ul li, #te_current ul li a {
+	color:#333;
+	text-align:left;
+	font-size:10px;
+}
+#te_current ul {
+	margin:0 0 0 8px !important;
+	line-height:18px !important;
+	text-align:left;
+}
+#te_current ul li{ 
+	line-height:18px !important; 
+	font-size:10px;
+}
+#te_current strong {
+	font-weight:bold;
+}
+
+/* themes container
+ ------------------ */
+#te_themes {
+	position:absolute;
+	top:12px; left:210px;
 	list-style:none;
   text-align: center;
 }  
-#theme_explorer ul.te_themes li {
+#te_themes li {
 	display:inline-block;
 	min-width:110px;
 	height:100%;
-	margin:0 5px;
+	margin:0 5px !important;
 	text-align:center;
+	border:1px solid red;
 }	
-#theme_explorer ul.te_themes li a {
+#te_themes li a {
 	display:block;
 	line-height:100px;
-	border:1px solid #EEE;
 	border-radius:3px;
 	white-space: nowrap;
+	background:#000;
 	overflow:hidden;
+	box-shadow:2px 2px 10px #333;
 }	
-#theme_explorer ul.te_themes li a:hover, #theme_explorer ul.te_themes li a.active { 
-	background:green;
+#te_themes li a:hover {
+	box-shadow:2px 2px 10px #555;
+}
+#te_themes li a.active { 
+	background:#26ADE4;
 }
 
-/* from twitter bootstrap 1.4.0 */
+
+/* from twitter bootstrap 1.4.0 
+ ------------------------------ */
 #theme_explorer a.btn.primary {
   color: #ffffff;
   background-color: #0064cd;

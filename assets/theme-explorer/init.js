@@ -1,49 +1,87 @@
 $(function(){
-	
-	var TE = {
-		$container : $("#theme_explorer"),
-		currentTheme : location.pathname.split("/")[2],
-		$toggler : $("#theme_explorer_hide"), 
+  
+  var TE = {
+    $container : $("#theme_explorer"),
+    $current : $("#te_current"),
+    $themesWrap : $("#te_themes"),
+    $installBtn : $("#te_install"),
+    $toggler : $("#theme_explorer_hide"),
+    currentThemeTmpl : $("#te_current_theme_data").html(),
+    themesTmpl : $("#te_themes_tmpl").html(),
+    currentTheme : location.pathname.split("/")[2],
+    themes : [],
+    
+    // initialize theme explorer
+    init : function(){
+      TE.$toggler.click(function(e){
+        TE.toggle();
+        e.preventDefault();
+        return false;
+      })
 
-	// initialize theme explorer
-		init : function(){
-			TE.$toggler.click(function(e){
-		    TE.toggle();
-				e.preventDefault();
-		    return false;
-		  })
-			
-			TE.loadThemes();
-			TE.setActiveTheme();
-		},
-		
-	// populate themes into theme explorer
-		loadThemes : function(){
-			var themes = ["twitter", "the-minimum", "tom", "mark-reid"];
-		  var cache = "";
-		  themes.forEach(function(theme){
-		    cache += '<li><a href="/themes/'+ theme +'" class="'+ theme +'">'+ theme +'</a></li>';
-		  })
-		  TE.$container.find("ul.te_themes").html(cache);
-		},
-		
-	// show/hide theme explorer
-		toggle : function(){
-			TE.$container.animate({
-				bottom: parseInt(TE.$container.css('bottom'),10) == 0 ? -TE.$container.outerHeight() : 0
-			});
-			TE.$toggler.text( (TE.$toggler.text() === "HIDE") ? "SHOW" : "HIDE" );
-		},
-		
-	// Set current active theme
-		setActiveTheme : function(){
-			if(typeof TE.currentTheme !== "undefined"){
-				TE.$container.find(".current_theme").find("span").text(TE.currentTheme);
-				TE.$container.find("ul.te_themes").find("a."+ TE.currentTheme).addClass("active");
-			}
-		}
-		
-	}
+      TE.$current.hover(
+        function(){ $(this).addClass("stretch") }, 
+        function(){ $(this).removeClass("stretch") }
+      )
+    
+      $.getJSON("/themes/data.json", function(data){
+        TE.themes = data;
+        TE.loadThemes();
+        TE.setActiveTheme();
+      })
+    },
+  
+    // populate themes into theme explorer
+    loadThemes : function(){
+      TE.$themesWrap.html(
+        $.mustache(TE.themesTmpl, {
+          themes : TE.themes, 
+          buildUrl : function(){ 
+            return function(name, render) 
+              return render( TE.buildUrl(name) )
+          }
+        })
+      );
+    },
+    
+    // return theme object by name  
+    getTheme : function(theme_name){
+      var t;
+      $.each(TE.themes, function(){
+        if(this.name === theme_name){ t = this; return false }
+      })
+      return t;
+    },
+    
+    // Set current active theme
+    // set installer url, highlight theme, display meta-data
+    setActiveTheme : function(){
+      var theme = TE.getTheme(TE.currentTheme);
+      if(theme){
+        var url = TE.$installBtn.attr("href");
+        TE.$installBtn.attr("href", url + "?theme="+ theme.name);
+        TE.$themesWrap.find("a."+ theme.name).addClass("active");
+        TE.$current.html( $.mustache(TE.currentThemeTmpl, theme) );
+      }
+    },
 
-	TE.init();
+    // builds the Url for the given themeName
+    buildUrl : function(themeName){
+      var arr = location.pathname.split("/");
+      if   (arr[1] === "themes")  arr[2] = themeName;
+      else { arr.shift(); arr.unshift("", "themes", themeName) }
+      return arr.join("/");
+    },
+    
+    // show/hide theme explorer
+    toggle : function(){
+      TE.$container.animate({
+        bottom: parseInt(TE.$container.css('bottom'),10) == 0 ? -TE.$container.outerHeight() : 0
+      });
+      TE.$toggler.text( (TE.$toggler.text() === "HIDE") ? "SHOW" : "HIDE" );
+    }
+    
+  }
+
+  TE.init();
 })
