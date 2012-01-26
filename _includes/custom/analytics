@@ -1,95 +1,23 @@
+<!--[if lte IE 6]>
 <style type="text/css">
-  #theme_explorer {
-    position:fixed !important;
-    top:0; left:0;
-    width:200px !important;
-    height:100% !important;
-    background:#555 !important;
-    border-right:1px solid #222 !important;
-    z-index:999998 !important;
-    box-shadow:1px -2px 18px #555;
-  }
-  
-  #theme_explorer h2 {
-    font-size: 14px; font-weight:bold; color:#FFF;
-    padding-left:10px;
-    line-height:34px;
-    background:#111;
-  }
-  #theme_explorer h4 { 
-    font-size: 14px; font-weight:bold; 
-    color:#FFF;
-    text-align:left;
-    padding-left:10px;
-    line-height:34px;
-    background:transparent;
-  }
-  
-  #theme_explorer div.current_theme {
-    background:#ccc;
-    height:100px;
-  }
-  #theme_explorer div { 
-    padding:10px !important;
-  }
-  #theme_explorer ul {
-    text-align: left !important;;
-    margin:0; padding:0 !important;
-  }  
-  #theme_explorer a {
-    color:#FFF !important;
-    font-weight: normal !important;
-    font-family:verdana !important;
-    font-size: 12px !important;
-  }  
-  #theme_explorer_hide { 
-    display:block;
-    text-align:center;
-    background:red;
-    position:fixed;
-    bottom:0;left:0;
-    width:200px; 
-    font-size:20px;
-    line-height:34px;
-    color:#FFF;
-    z-index:999999 !important;
-  }
+body {height:100%; overflow-y:auto;}
+html {overflow-x:auto; overflow-y:hidden;}
+* html .footer {position:absolute;}
 </style>
-  <div id="theme_explorer">
-    <h2>Theme Explorer</h2>
-    <h4>Current Theme</h4>
-    <div class="current_theme">
-      
-      
-    </div>
-    <h4>Next Theme</h4>
-
-    <div class="inner">
-      <ul>
-  
-      </ul>
-    </div>
+<![endif]-->
+<div id="theme_explorer">
+  <ul class="te_tab te_header">
+    <li><a href="/">Theme Explorer</a></li>
+    <li><a href="#" class="te_hide" id="theme_explorer_hide">HIDE</a></li>
+  </ul>
+  <div class="current_theme">
+    <a href="http://jekyllbootstrap.com/themes/instal.html" class="btn primary">Install Theme</a>
+    <br>
+    <span>Twitter</span>
   </div>
-  <a href="#" id="theme_explorer_hide">hide</a>
+  <ul class="te_themes"> </ul>
+</div>
 
+<link rel="stylesheet" href="/assets/theme-explorer/style.css?body=1" type="text/css" media="screen" charset="utf-8">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" charset="utf-8"></script>
-<script>
-  $(function(){
-    var $themeExplorer = $("#theme_explorer");
-    var themes = ["twitter", "the-minimum", "tom", "mark-reid"];
-    var cache = "";
-    
-    $themeExplorer.show();
-
-    themes.forEach(function(theme){
-      cache += '<li><a href="/themes/'+ theme +'">'+ theme +'</a></li>';
-    })
-    
-    $themeExplorer.find("ul").html(cache);
-    $("#theme_explorer_hide").click(function(e){
-      $themeExplorer.animate({left: parseInt($themeExplorer.css('left'),10) == 0 ? -$themeExplorer.outerWidth() : 0});
-      e.preventDefault();
-      return false;
-    })
-  })
-</script>
+<script type="text/javascript" src="/assets/theme-explorer/init.js" charset="utf-8"></script>
