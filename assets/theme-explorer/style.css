@@ -107,7 +107,7 @@
 	white-space: nowrap;
 	overflow:hidden;
 }	
-#theme_explorer ul.te_themes li a:hover { 
+#theme_explorer ul.te_themes li a:hover, #theme_explorer ul.te_themes li a.active { 
 	background:green;
 }
 
