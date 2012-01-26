@@ -1,2 +1,7 @@
 theme :
   name : twitter
+  description : "A short description"
+  version : "0.0.1"
+  author : 
+    name : Twitter
+    website : http://twitter.github.com/bootstrap
