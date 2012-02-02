@@ -10,7 +10,6 @@ $(function(){
     $toggler : $("#theme_explorer_hide"),
     currentThemeTmpl : $("#te_current_theme_data").html(),
     themesTmpl : $("#te_themes_tmpl").html(),
-    currentTheme : location.pathname.split("/")[2],
     themes : [],
     
     // initialize theme explorer
@@ -54,10 +53,18 @@ $(function(){
       return t;
     },
     
+    // get theme for current page.
+    // assumes "twitter" theme for homepage
+    // returns (String) themeName
+    currentThemeName : function(){
+      var arr = location.pathname.split("/");
+      return (arr[1] === TE.namespace) ? arr[2] : "twitter";
+    },
+    
     // Set current active theme
     // set installer url, highlight theme, display meta-data
     setActiveTheme : function(){
-      var theme = TE.getTheme(TE.currentTheme);
+      var theme = TE.getTheme(TE.currentThemeName());
       if(theme){
         var url = TE.$installBtn.attr("href");
         TE.$installBtn.attr("href", url + "?theme="+ theme.name);
