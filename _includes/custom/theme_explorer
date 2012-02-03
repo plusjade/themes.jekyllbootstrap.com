@@ -30,7 +30,7 @@ html {overflow-x:auto; overflow-y:hidden;}
     <li><a href="#" class="te_hide" id="theme_explorer_hide">HIDE</a></li>
   </ul>
   <div id="te_current" class="current_theme"></div>
-  <a href="http://jekyllbootstrap.com/themes/install.html" id="te_install" class="btn primary">Install Theme</a>
+  <a href="http://jekyllbootstrap.com/usage/jekyll-theming.html" id="te_install" class="btn primary">Install Theme</a>
 </div>
 
 <link rel="stylesheet" href="/assets/theme-explorer/style.css?body=1" type="text/css" media="screen" charset="utf-8">
