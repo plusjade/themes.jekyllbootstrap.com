@@ -4,11 +4,11 @@ $(function(){
     // name of subdirectory themes are in.
     namespace : 'preview', 
     $container : $("#theme_explorer"),
-    $current : $("#te_current"),
     $themesWrap : $("#te_themes"),
     $installBtn : $("#te_install"),
+    $modal : $("#modal"),
     $toggler : $("#theme_explorer_hide"),
-    currentThemeTmpl : $("#te_current_theme_data").html(),
+    modalTmpl : $("#modal_tmpl").html(),
     themesTmpl : $("#te_themes_tmpl").html(),
     themes : [],
     
@@ -19,11 +19,12 @@ $(function(){
         e.preventDefault();
         return false;
       })
-
-      TE.$current.hover(
-        function(){ $(this).addClass("stretch") }, 
-        function(){ $(this).removeClass("stretch") }
-      )
+      
+      TE.$installBtn.click(function(e){
+        TE.$modal.modal();
+        e.preventDefault();
+        return false;
+      })
 
       $.getJSON("/"+TE.namespace+"/data.json", function(data){
         TE.themes = data;
@@ -67,9 +68,12 @@ $(function(){
       var theme = TE.getTheme(TE.currentThemeName());
       if(theme){
         var url = TE.$installBtn.attr("href");
-        TE.$installBtn.attr("href", url + "?theme="+ theme.name);
         TE.$themesWrap.find("a."+ theme.name).addClass("active");
-        TE.$current.html( $.mustache(TE.currentThemeTmpl, theme) );
+        
+        // pre-populate modal with data
+        TE.$modal.html(
+          $.mustache(TE.modalTmpl, TE.getTheme(TE.currentThemeName()))
+        );
       }
     },
 
