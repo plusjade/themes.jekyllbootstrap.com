@@ -186,22 +186,43 @@ html {overflow-x:auto; overflow-y:hidden;}
 * html .footer {position:absolute;}
 </style>
 <![endif]-->
-<script id="te_current_theme_data" type="text/x-jquery-tmpl">
-  <ul>
-    <li><strong>name:</strong> [[name]]</li>
-    <li>"[[description]]"</li>
-    <li><strong>author:</strong>
-      <ul>
-        <li>[[author.name]]</li>
-        <li><a href="[[author.website]]" target="_blank">[[author.website]]</a></li>
-      </ul>
-    </li>
-  </ul>
-</script>
 <script id="te_themes_tmpl" type="text/x-jquery-tmpl">
   [[#themes]]
     <li><a href="[[#buildUrl]][[name]][[/buildUrl]]" class="[[name]]" title="[[description]]">[[name]]</a></li>
   [[/themes]]
+</script>
+
+<script id="modal_tmpl" type="text/x-jquery-tmpl">
+<div class="modal-header">
+  <a class="close" data-dismiss="modal">×</a>
+  <h3>Installation Guide: [[name]]</h3>
+</div>
+<div class="modal-body">
+  <p>To install, run the following rake task in the root of your Jekyll-Bootstrap directory.</p>
+  <pre><code>rake theme:install git="[[git_url]]"</code></pre>
+  <ul>
+    <li><strong>name:</strong> [[name]]</li>
+  [[#description]]
+    <li>"[[description]]"</li>
+  [[/description]]
+    <li><strong>author:</strong>
+      <ul>
+        <li>[[author.name]]</li>
+      [[#author.email]]
+        <li>[[author.email]]</li>
+      [[/author.email]]
+      [[#author.website]]
+        <li><a href="[[author.website]]" target="_blank">[[author.website]]</a></li>
+      [[/author.website]]  
+      </ul>
+    </li>
+  </ul>
+</div>
+<div class="modal-footer">
+[[#source_url]]
+  <a href="[[source_url]]" class="btn" target="_blank">View Source</a>
+[[/source_url]]  
+</div>  
 </script>
 
 <div id="theme_explorer">
@@ -210,14 +231,25 @@ html {overflow-x:auto; overflow-y:hidden;}
     <li><a href="/">Theme Explorer</a></li>
     <li><a href="#" class="te_hide" id="theme_explorer_hide">HIDE</a></li>
   </ul>
-  <div id="te_current" class="current_theme"></div>
-  <a href="http://jekyllbootstrap.com/themes/install.html" id="te_install" class="btn primary">Install Theme</a>
+  <a href="#modal" id="te_install" class="btn primary">Install Theme</a>
+</div>
+
+<div id="modal" class="modal fade">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Installation Guide</h3>
+  </div>
+  <div class="modal-body"></div>
+  <div class="modal-footer">
+    <a href="#" class="btn">View GitHub Repo</a>
+  </div>
 </div>
 
 <link rel="stylesheet" href="/assets/theme-explorer/style.css?body=1" type="text/css" media="screen" charset="utf-8">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="/assets/theme-explorer/mustache.js" charset="utf-8"></script>
-<script type="text/javascript" src="/assets/theme-explorer/init.js?v=0.0.2" charset="utf-8"></script>
+<script type="text/javascript" src="/assets/theme-explorer/bootstrap-modal.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/assets/theme-explorer/init.js?v=0.2.0" charset="utf-8"></script>
 
 
 
