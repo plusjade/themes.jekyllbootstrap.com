@@ -5,29 +5,30 @@ task :generate_themes do
   require 'yaml'
   theme_data = []
   namespace = "preview" # folder all themes are namespaced into.
+  
+  theme_packages = File.join(SOURCE, "_theme_packages")
+  
+  Dir.glob("#{theme_packages}/*") do |package|
+    next unless FileTest.directory?(package)
 
-  Dir.glob("#{CONFIG['themes']}/*") do |theme|
-    next unless FileTest.directory?(theme)
+    manifest = verify_manifest(package)
+    theme_data << manifest
+    theme = manifest["name"]
     
-    # Grab theme data
-    settings_file = File.join(theme, "settings.yml")
-    if FileTest.exist?(settings_file)
-      theme_data << YAML.load_file(settings_file)["theme"]
-    end
     
     # Edit configuration to scope to a generated theme sub-directory.
     # Also omit theme folder to avoid recursion ; assets because asset urls are absolute.
     options = Jekyll.configuration({
       "safe" => true,
-      "destination" => File.join(SOURCE, namespace, File.basename(theme)),
+      "destination" => File.join(SOURCE, namespace, manifest["name"]),
       "JB" => {
-        "BASE_PATH" => "/#{namespace}/#{File.basename(theme)}",
-        "ASSET_PATH" => "/assets/themes/#{File.basename(theme)}"
+        "BASE_PATH" => "/#{namespace}/#{manifest["name"]}",
+        "ASSET_PATH" => "/assets/themes/#{manifest["name"]}"
       },
     })
     options["exclude"] += [namespace, "assets"]
     
-    system "rake switch_theme name='#{File.basename(theme)}'"
+    system "rake switch_theme name='#{manifest["name"]}'"
 
     puts "Building site: #{options['source']} -> #{options['destination']}"
     begin
